@@ -45,13 +45,13 @@
                         <p class="textbox-description">Again enter password</p>
                     </div>
                     <div class="textbox-area">
-                        <p class="textbox-title">Fullname</p>
+                        <p class="textbox-title">Firstname</p>
                         @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "textbox-input", placeholder = "Ex: An", maxlength = 20 } })
                         <p class="textbox-description">Enter your firstname</p>
                         @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "error" })
                     </div>
                     <div class="textbox-area">
-                        <p class="textbox-title">Fullname</p>
+                        <p class="textbox-title">Lastname</p>
                         @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "textbox-input", placeholder = "Ex: Pham Minh", maxlength = 20 } })
                         <p class="textbox-description">Enter your lastname</p>
                         @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "error" })

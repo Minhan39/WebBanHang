@@ -6,12 +6,14 @@ using System.Web;
 
 namespace SpiderFoodStore.Models
 {
-    public class OrderDetails
+    public class CommentCustomer
     {
-        [Key]
         public int Id { get; set; }
-        public string OrderInvoiceId { get; set; }
         public int ProductId { get; set; }
-        public int Amount { get; set; }
+        public string Content { get; set; }
+        public int Parent { get; set; }
+        public string ImagePath { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
     }
 }

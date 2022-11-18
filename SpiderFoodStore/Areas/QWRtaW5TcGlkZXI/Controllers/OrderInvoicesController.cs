@@ -116,6 +116,24 @@ namespace SpiderFoodStore.Areas.QWRtaW5TcGlkZXI.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult PrintInvoice(int id)
+        {
+            OrderInvoice orderInvoice = db.OrderInvoices.Find(id);
+            List<OrderDetailBill> list = (from OrderDetails in db.OrderDetails
+                                       join Products in db.Products on new { Id = OrderDetails.ProductId } equals new { Id = Products.Id }
+                                       where OrderDetails.OrderInvoiceId == orderInvoice.OrderId
+                                       select new OrderDetailBill
+                                       {
+                                           Id = OrderDetails.Id,
+                                           Name = Products.Name,
+                                           ImagePath = Products.ImagePath,
+                                           Amount = OrderDetails.Amount,
+                                           Price = Products.Price
+                                       }).ToList();
+            ViewBag.List = list;
+            return View(orderInvoice);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

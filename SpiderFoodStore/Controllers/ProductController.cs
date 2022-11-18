@@ -3,6 +3,7 @@ using SpiderFoodStore.Data;
 using SpiderFoodStore.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,7 +39,11 @@ namespace SpiderFoodStore.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ListImages = db.ListImages.Where(n => n.ProductId == id).ToList();
             ViewBag.LatestProduct = db.Products.Select(n => n).OrderByDescending(n => n.AtUpdate).Where(n => n.isHide == false).Take(4).ToList();
+            product.NumberOfViews++;
+            db.Products.AddOrUpdate(product);
+            db.SaveChanges();
             return View(product);
         }
         public ActionResult ShopGrid(int? page, string searchString, int? category)

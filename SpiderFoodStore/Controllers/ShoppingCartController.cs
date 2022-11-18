@@ -180,8 +180,7 @@ namespace SpiderFoodStore.Controllers
             string s = DateTime.Now.Ticks.ToString();
             pay.AddRequestData("vnp_TxnRef", s); //mã hóa đơn
             bill.OrderId = s;
-            db.OrderInvoices.Add(bill);
-            db.SaveChanges();
+            Session["bill"] = bill;
 
             string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
 
@@ -216,30 +215,40 @@ namespace SpiderFoodStore.Controllers
 
                 bool checkSignature = pay.ValidateSignature(vnp_SecureHash, hashSecret); //check chữ ký đúng hay không?
 
-                OrderInvoice bill = db.OrderInvoices.FirstOrDefault(n => n.OrderId == orderId.ToString());
-
                 if (checkSignature)
                 {
                     if (vnp_ResponseCode == "00")
                     {
+                        OrderInvoice bill = Session["bill"] as OrderInvoice;
                         bill.isPaid = true;
-                        db.OrderInvoices.AddOrUpdate(bill);
+                        List<ShoppingCart> list = Session["Cart"] as List<ShoppingCart>;
+                        foreach(ShoppingCart item in list)
+                        {
+                            OrderDetails details = new OrderDetails();
+                            details.Amount = item.Amount;
+                            details.OrderInvoiceId = bill.OrderId;
+                            details.ProductId = item.Id;
+                            db.OrderDetails.Add(details);
+                            Product product = db.Products.Find(item.Id);
+                            product.QuanlityPurchased += item.Amount;
+                            db.Products.AddOrUpdate(product);
+                        }
+                        db.OrderInvoices.Add(bill);
                         db.SaveChanges();
+                        Session["bill"] = Session["Cart"] = null;
                         //Thanh toán thành công
                         ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
                     }
                     else
                     {
-                        Session["Cart"] = null;
-                        db.OrderInvoices.Remove(bill);
+                        Session["bill"] = null;
                         //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
                         ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
                     }
                 }
                 else
                 {
-                    Session["Cart"] = null;
-                    db.OrderInvoices.Remove(bill);
+                    Session["bill"] = null;
                     ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
                 }
             }
@@ -260,8 +269,21 @@ namespace SpiderFoodStore.Controllers
             bill.PhoneOfConsignee = customer.Phone;
             bill.isDelivered = false;
             bill.isPaid = false;
+            List<ShoppingCart> list = Session["Cart"] as List<ShoppingCart>;
+            foreach (ShoppingCart item in list)
+            {
+                OrderDetails details = new OrderDetails();
+                details.Amount = item.Amount;
+                details.OrderInvoiceId = bill.OrderId;
+                details.ProductId = item.Id;
+                db.OrderDetails.Add(details);
+                Product product = db.Products.Find(item.Id);
+                product.QuanlityPurchased += item.Amount;
+                db.Products.AddOrUpdate(product);
+            }
             db.OrderInvoices.Add(bill);
             db.SaveChanges();
+            Session["bill"] = Session["Cart"] = null;
             return RedirectToAction("PaymentConfirm", "ShoppingCart", new {cash = 1});
         }
     }

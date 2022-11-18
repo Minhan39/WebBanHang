@@ -140,10 +140,12 @@
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\ChartsController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\ListImagesController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\OrderInvoicesController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\ProductsController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\Controllers\SaleCodesController.cs" />
     <Compile Include="Areas\QWRtaW5TcGlkZXI\QWRtaW5TcGlkZXIAreaRegistration.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\InfoShopController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -176,10 +178,26 @@
     <Compile Include="Migrations\202210270227247_InitialCreate5.designer.cs">
       <DependentUpon>202210270227247_InitialCreate5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211020405520_InitialCreate6.cs" />
+    <Compile Include="Migrations\202211020405520_InitialCreate6.designer.cs">
+      <DependentUpon>202211020405520_InitialCreate6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211020744555_InitialCreate7.cs" />
+    <Compile Include="Migrations\202211020744555_InitialCreate7.designer.cs">
+      <DependentUpon>202211020744555_InitialCreate7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211050449175_InitialCreate8.cs" />
+    <Compile Include="Migrations\202211050449175_InitialCreate8.designer.cs">
+      <DependentUpon>202211050449175_InitialCreate8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentCustomer.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\ListImages.cs" />
+    <Compile Include="Models\OrderDetailBill.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\OrderInvoice.cs" />
     <Compile Include="Models\PairI.cs" />
@@ -196,6 +214,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Comment.css" />
     <Content Include="Content\css\about.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\elegant-icons.css" />
@@ -320,6 +339,9 @@
     <Content Include="Areas\QWRtaW5TcGlkZXI\Views\OrderInvoices\Index.cshtml" />
     <Content Include="Areas\QWRtaW5TcGlkZXI\Views\Admin\Login.cshtml" />
     <Content Include="Areas\QWRtaW5TcGlkZXI\Views\Charts\Index.cshtml" />
+    <Content Include="Areas\QWRtaW5TcGlkZXI\Views\ListImages\Index.cshtml" />
+    <Content Include="Areas\QWRtaW5TcGlkZXI\Views\ListImages\Delete.cshtml" />
+    <Content Include="Areas\QWRtaW5TcGlkZXI\Views\OrderInvoices\PrintInvoice.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -373,6 +395,8 @@
     <Content Include="Views\Customer\Profile.cshtml" />
     <Content Include="Views\Customer\ErrorProfile.cshtml" />
     <Content Include="Views\ShoppingCart\PaymentConfirm.cshtml" />
+    <Content Include="Views\Comment\ParentComment.cshtml" />
+    <Content Include="Views\Comment\ChildComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -409,6 +433,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210270227247_InitialCreate5.resx">
       <DependentUpon>202210270227247_InitialCreate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211020405520_InitialCreate6.resx">
+      <DependentUpon>202211020405520_InitialCreate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211020744555_InitialCreate7.resx">
+      <DependentUpon>202211020744555_InitialCreate7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211050449175_InitialCreate8.resx">
+      <DependentUpon>202211050449175_InitialCreate8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,68 @@
+﻿@using SpiderFoodStore.Models
+@model IEnumerable<SpiderFoodStore.Models.ListImages>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/QWRtaW5TcGlkZXI/Views/Shared/_AdminLayoutPage.cshtml";
+    Product product = ViewBag.Product as Product;
+}
+
+<h2>List Image of @product.Name (ID: @product.Id)</h2>
+
+<p>
+    <a href="#" class="btn btn-dark" role="button" id="btnControl" onclick="FunctionHide()">Add a image</a>
+</p>
+
+@using (Html.BeginForm("Create", "ListImages", FormMethod.Post, htmlAttributes: new {@id="form", @style="display: none;", @class="flex-column", @enctype="multipart/form-data"}))
+{
+    <input name="ImageFile" type="file" class="mb-4"/>
+    <input hidden name="id" value="@product.Id"/>
+    <button type="submit" class="btn btn-success mb-4">Save</button>
+}
+
+@ViewBag.Message
+
+<table class="table">
+    <tr>
+        <th>
+            No.
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+        <th></th>
+    </tr>
+    @{ int cnt = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{ 
+                    cnt++;
+                }
+                @cnt
+            </td>
+            <td>
+                <img src="/Content/Images/@item.ImagePath" height="50"/>
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id, productId = product.Id }, htmlAttributes: new {@class = "btn btn-danger", @role = "button"})
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="@Url.Action("Index", "Products")" class="btn btn-secondary" role="button">Back To List</a>
+<script>
+    function FunctionHide() {
+        var x = document.getElementById("form");
+        var y = document.getElementById("btnControl");
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+            y.innerText = "Close"
+        } else {
+            x.style.display = "none";
+            y.innerText = "Add a image"
+        }
+    }
+</script>

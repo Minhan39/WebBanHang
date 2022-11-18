@@ -22,9 +22,6 @@
             @Html.DisplayNameFor(model => model.Total)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DeliveryDate)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.NameOfConsignee)
         </th>
         <th>
@@ -53,9 +50,6 @@
                 @Html.DisplayFor(modelItem => item.Total)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.NameOfConsignee)
             </td>
             <td>
@@ -82,6 +76,7 @@
                 }
             </td>
             <td>
+                <a href="@Url.Action("PrintInvoice", "OrderInvoices", new {id=item.Id})" class="btn btn-light"><i class="fa fa-print" aria-hidden="true"></i> Print bill</a>
                 <a href="@Url.Action("Edit", "OrderInvoices", new {id=item.Id})" class="btn btn-warning" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                 <a href="@Url.Action("Details", "OrderInvoices", new {id=item.Id})" class="btn btn-info" role="button"><i class="fa fa-info-circle" aria-hidden="true"></i> Details</a>
                 <a href="@Url.Action("Delete", "OrderInvoices", new {id=item.Id})" class="btn btn-danger" role="button"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>

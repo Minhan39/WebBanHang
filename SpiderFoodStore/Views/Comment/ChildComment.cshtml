@@ -1,0 +1,18 @@
+﻿@using SpiderFoodStore.Models
+@model List<SpiderFoodStore.Models.CommentCustomer>
+
+@foreach (CommentCustomer item in Model)
+{
+    <div class="media mt-3">
+        <a class="pr-3" href="#"><img class="rounded-circle" src="/Content/Images/@item.ImagePath" /></a>
+        <div class="media-body">
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <h5>@item.Lastname @item.Firstname</h5>
+                    @*<span>- 4 hours ago</span>*@
+                </div>
+            </div>
+            @item.Content
+        </div>
+    </div>
+}

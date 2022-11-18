@@ -30,5 +30,11 @@ namespace SpiderFoodStore.Data
         public System.Data.Entity.DbSet<SpiderFoodStore.Models.SaleCode> SaleCodes { get; set; }
 
         public System.Data.Entity.DbSet<SpiderFoodStore.Models.Admin> Admins { get; set; }
+
+        public System.Data.Entity.DbSet<SpiderFoodStore.Models.ListImages> ListImages { get; set; }
+
+        public System.Data.Entity.DbSet<SpiderFoodStore.Models.Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<SpiderFoodStore.Models.OrderDetails> OrderDetails { get; set; }
     }
 }

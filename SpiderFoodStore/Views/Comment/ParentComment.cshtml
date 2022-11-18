@@ -1,0 +1,32 @@
+﻿@using SpiderFoodStore.Models
+@model List<SpiderFoodStore.Models.CommentCustomer>
+
+@foreach (CommentCustomer item in Model)
+{
+    <div class="media">
+        <img class="mr-3 rounded-circle" src="/Content/Images/@item.ImagePath" />
+        <div class="media-body">
+            <div class="row">
+                <div class="col-8 d-flex">
+                    <h5>@item.Lastname @item.Firstname</h5>
+                    @*<span>- 2 hours ago</span>*@
+                </div>
+                <div class="col-4">
+                    <div class="pull-right reply">
+                        <a href="#"><span><i class="fa fa-reply"></i> reply</span></a>
+                    </div>
+                </div>
+            </div>
+            @item.Content
+            @Html.Action("ChildComment", "Comment", new { id = ViewBag.ProductId, parentId = item.Id })
+            @using (Html.BeginForm("NewComment", "Comment", FormMethod.Post))
+            {
+                <p>Comment for @item.Lastname @item.Firstname</p>
+                <textarea style="width: 100%; height: 100px;" name="content"></textarea>
+                <input hidden name="id" value="@ViewBag.ProductId" />
+                <input hidden name="parent" value="@item.Id" />
+                <button class="btn btn-primary" type="submit">Send</button>
+            }
+        </div>
+    </div>
+}
